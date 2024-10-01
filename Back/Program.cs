@@ -24,7 +24,7 @@ app.UseHttpsRedirection();
 app.MapGet("/reservation", async (ReservationService reservations) => Results.Ok(await reservations.GetAll()));
 
 app.MapGet("/reservation/{email}",
-        async (ReservationService reservations, string email) => Results.Ok(await reservations.GetByEmail(email)));
+    async (ReservationService reservations, string email) => Results.Ok(await reservations.GetByEmail(email)));
 
 app.MapPut("/reservation",
     async (ReservationService reservations, AddReservationDto dto) =>
@@ -56,8 +56,10 @@ internal partial class ReservationService
     {
         _db = db;
     }
-    
-    public async Task<List<Reservation>> GetByEmail(string email) => await _db.Reservations.Where(x => x.Email.Equals(email, StringComparison.OrdinalIgnoreCase)).ToListAsync();
+
+    public async Task<List<Reservation>> GetByEmail(string email) => await _db.Reservations
+        .Where(x => x.Email.Equals(email, StringComparison.OrdinalIgnoreCase)).ToListAsync();
+
     public async Task<List<Reservation>> GetAll() => await _db.Reservations.ToListAsync();
 
     public async Task<List<DateOnly>> GetDates()
@@ -137,7 +139,7 @@ internal partial class ReservationService
             DayOfWeek.Friday or DayOfWeek.Saturday => [15, 16, 17, 18, 19, 20, 21],
             _ => [17, 18, 19, 20]
         };
-        
+
         available.RemoveAll(x => unavailable.Contains(x) || x <= DateTime.Now.Hour);
         return available;
     }
