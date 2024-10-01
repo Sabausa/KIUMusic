@@ -21,23 +21,17 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/reservation", async (ReservationService reservations) => Results.Ok(await reservations.GetAll()))
-    .WithName("GetReservations")
-    .WithOpenApi();
+app.MapGet("/reservation", async (ReservationService reservations) => Results.Ok(await reservations.GetAll()));
 
-app.MapGet("/reservation/{id:int}",
-        async (ReservationService reservations, int id) => Results.Ok(await reservations.GetById(id)))
-    .WithName("GetReservationWithID")
-    .WithOpenApi();
+app.MapGet("/reservation/{email}",
+        async (ReservationService reservations, string email) => Results.Ok(await reservations.GetByEmail(email)));
 
 app.MapPut("/reservation",
-        async (ReservationService reservations, AddReservationDto dto) =>
-        {
-            var res = await reservations.AddReservation(dto);
-            return res.Item1 ? Results.Ok(res.Item2) : Results.BadRequest(res.Item2);
-        })
-    .WithName("AddReservation")
-    .WithOpenApi();
+    async (ReservationService reservations, AddReservationDto dto) =>
+    {
+        var res = await reservations.AddReservation(dto);
+        return res.Item1 ? Results.Ok(res.Item2) : Results.BadRequest(res.Item2);
+    });
 
 app.MapGet("/times/{year:int}-{month:int}-{day:int}",
     async (ReservationService reservations, int year, int month, int day) =>
@@ -55,13 +49,17 @@ internal partial class ReservationService
 {
     [GeneratedRegex(@"^([a-zA-Z0-9]+)\.([a-zA-Z0-9]+)@kiu\.edu\.ge$")]
     private static partial Regex KiuEmailRegex();
+
     private readonly ApiDbContext _db;
+
     public ReservationService(ApiDbContext db)
     {
         _db = db;
     }
-    public async Task<Reservation?> GetById(int id) => await _db.Reservations.FirstOrDefaultAsync(x => x.Id == id);
+    
+    public async Task<List<Reservation>> GetByEmail(string email) => await _db.Reservations.Where(x => x.Email.Equals(email, StringComparison.OrdinalIgnoreCase)).ToListAsync();
     public async Task<List<Reservation>> GetAll() => await _db.Reservations.ToListAsync();
+
     public async Task<List<DateOnly>> GetDates()
     {
         List<DateOnly> dates = [];
@@ -78,6 +76,7 @@ internal partial class ReservationService
 
         return dates;
     }
+
     public async Task<Tuple<bool, string>> AddReservation(AddReservationDto dto)
     {
         if (!CheckEmail(dto.Email))
@@ -128,6 +127,7 @@ internal partial class ReservationService
             }
         }
     }
+
     public async Task<List<int>> GetAvailableTimes(DateOnly date)
     {
         var unavailable = await GetUnavailableTimes(date);
@@ -135,56 +135,27 @@ internal partial class ReservationService
         List<int> available = date.DayOfWeek switch
         {
             DayOfWeek.Friday or DayOfWeek.Saturday => [15, 16, 17, 18, 19, 20, 21],
-            DayOfWeek.Sunday or DayOfWeek.Monday or DayOfWeek.Tuesday or DayOfWeek.Wednesday or DayOfWeek.Thursday =>
-                [17, 18, 19, 20, 21],
-            _ => throw new ArgumentOutOfRangeException(nameof(date))
+            _ => [17, 18, 19, 20]
         };
-
+        
         available.RemoveAll(x => unavailable.Contains(x) || x <= DateTime.Now.Hour);
-
         return available;
     }
+
     public async Task<bool[]> GetAvailableInstruments(DateOnly date, int hour)
     {
-        var ans = new bool[5];
         var res = await _db.Reservations.FirstOrDefaultAsync(x => x.Date == new DateTime(date, new TimeOnly(hour, 0)));
-
-        if (res == null)
-        {
-            return [true, true, true, true, true];
-        }
-
-        if (res.IsGuitarTaken)
-        {
-            ans[0] = false;
-        }
-
-        if (res.IsBassTaken)
-        {
-            ans[1] = false;
-        }
-
-        if (res.IsDrumsTaken)
-        {
-            ans[2] = false;
-        }
-
-        if (res.IsPianoTaken)
-        {
-            ans[3] = false;
-        }
-
-        if (res.IsMicrophoneTaken)
-        {
-            ans[4] = false;
-        }
-
-        return ans;
+        return res == null
+            ? [true, true, true, true, true]
+            : [!res.IsGuitarTaken, !res.IsBassTaken, !res.IsDrumsTaken, !res.IsPianoTaken, !res.IsMicrophoneTaken];
     }
-    private async Task<List<int>> GetUnavailableTimes(DateOnly date) => await _db.Reservations
-        .Where(res => DateOnly.FromDateTime(res.Date) == date && res.IsOpen == false)
-        .Select(res => res.Date.TimeOfDay.Hours)
-        .ToListAsync();
+
+    private async Task<List<int>> GetUnavailableTimes(DateOnly date) =>
+        await _db.Reservations
+            .Where(res => DateOnly.FromDateTime(res.Date) == date && res.IsOpen == false)
+            .Select(res => res.Date.TimeOfDay.Hours)
+            .ToListAsync();
+
     private static bool CheckEmail(string email)
     {
         return KiuEmailRegex().Match(email).Success;
@@ -193,7 +164,7 @@ internal partial class ReservationService
 
 internal class ApiDbContext : DbContext
 {
-    public virtual DbSet<Reservation> Reservations { get; set; }
+    public virtual DbSet<Reservation> Reservations { get; init; }
 
     public ApiDbContext(DbContextOptions<ApiDbContext> options) : base(options)
     {
@@ -202,18 +173,18 @@ internal class ApiDbContext : DbContext
 
 internal class Reservation
 {
-    [Key] public int Id { get; set; }
-    [StringLength(50)] public string Email { get; set; } = string.Empty;
-    [DataType(DataType.DateTime)] public DateTime Date { get; set; }
+    [Key] public int Id { get; init; }
+    [StringLength(50)] public string Email { get; init; } = string.Empty;
+    [DataType(DataType.DateTime)] public DateTime Date { get; init; }
     public bool IsGuitarTaken { get; set; }
     public bool IsBassTaken { get; set; }
     public bool IsDrumsTaken { get; set; }
     public bool IsPianoTaken { get; set; }
     public bool IsMicrophoneTaken { get; set; }
-    public bool IsOpen { get; set; }
+    public bool IsOpen { get; init; }
 }
 
-internal class AddReservationDto
+internal abstract class AddReservationDto
 {
     public string Email { get; set; } = string.Empty;
     [DataType(DataType.Date)] public DateTime Date { get; set; }

@@ -16,8 +16,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8f8011ae-f326-4795-bb7d-ef6381f06a54" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KiuMusic/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KiuMusic/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.KiuMusic/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.KiuMusic/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Back/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/bin/Debug/net8.0/Back.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Back/bin/Debug/net8.0/Back.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/bin/Debug/net8.0/Back.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Back/bin/Debug/net8.0/Back.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/bin/Debug/net8.0/Back.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Back/bin/Debug/net8.0/Back.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Back/obj/Debug/net8.0/Back.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Back/obj/Debug/net8.0/Back.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Back/obj/Debug/net8.0/Back.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Back/obj/Debug/net8.0/Back.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/obj/Debug/net8.0/Back.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Back/obj/Debug/net8.0/Back.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/obj/Debug/net8.0/Back.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Back/obj/Debug/net8.0/Back.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/obj/Debug/net8.0/Back.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Back/obj/Debug/net8.0/Back.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/obj/Debug/net8.0/apphost.exe" beforeDir="false" afterPath="$PROJECT_DIR$/Back/obj/Debug/net8.0/apphost.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/obj/Debug/net8.0/ref/Back.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Back/obj/Debug/net8.0/ref/Back.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back/obj/Debug/net8.0/refint/Back.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Back/obj/Debug/net8.0/refint/Back.dll" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +40,7 @@
     <option name="autoShow" value="false" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Back" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -39,25 +51,26 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2mnm21icrksFOXOudzUVVREO74o" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Back: IIS Express.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "database.query.execution",
-    "ts.external.directory.path": "D:\\Projects\\KiuMusic\\Front\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Back: IIS Express.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Projects\\KiuMusic\\Front\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Back: IIS Express">
     <configuration name="Back: kiumusicapi - Web Deploy" type="DotNetMsBuildPublish" factoryName="Publish to IIS">
       <riderPublish configuration="Release" platform="Any CPU" publish_profile="kiumusicapi - Web Deploy.pubxml" pubxml_path="$PROJECT_DIR$/Back/Properties/PublishProfiles/kiumusicapi - Web Deploy.pubxml" user_name="REDACTED" uuid_high="1133132114542021913" uuid_low="-6387322981412485369" />
@@ -175,6 +188,8 @@
       <workItem from="1727767489014" duration="3743000" />
       <workItem from="1727780090381" duration="6231000" />
       <workItem from="1727786907284" duration="960000" />
+      <workItem from="1727797797563" duration="718000" />
+      <workItem from="1727803053251" duration="846000" />
     </task>
     <servers />
   </component>
@@ -195,25 +210,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/Back" />
+    </ignored-roots>
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Back/Program.cs</url>
-          <line>183</line>
-          <properties documentPath="D:\Projects\KiuMusic\Back\Program.cs" containingFunctionPresentation="Method 'GetUnavailableTimes'">
-            <startOffsets>
-              <option value="6257" />
-            </startOffsets>
-            <endOffsets>
-              <option value="6437" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
